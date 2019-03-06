@@ -37,6 +37,7 @@ public class List_inArraySlots{
      */
       public boolean add( int value) {
 	refArray[filledElements] = value;
+	filledElements ++;
 	return true;
       }
 
