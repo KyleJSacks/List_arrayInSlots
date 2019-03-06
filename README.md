@@ -20,7 +20,7 @@
 **Methods** 
 - *toString()* : returns a string representation of a list in [a,b,c] format.
 - *size()* : returns the number of filled elements in the array.
-- *add()* : when passed an argument, add() will append the value to the end of the list, update filledElements by 1, and return true. 
+- *add()* : when passed an argument, add() will append the value to the end of the list. If the list is already full, it will expand the list first.
 - *expand()* : doubles the length of array while preserving existing data.
 
 UserOfList tests instantiation, size(), and expand().
