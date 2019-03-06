@@ -17,6 +17,6 @@
 
 
 **Methods:** 
-- *getLength()* returns the value stored in the field, *len*
+- *getLen()* returns the value stored in the field, *len*
 
 UserOfList only tests instantiation and the length function currently
