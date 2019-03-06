@@ -29,13 +29,13 @@ public class List_inArraySlots{
 		return filledElements;
   	}
 	
-      /** 
-       @return a string representation of this list,
-       in [a,b,c,] format
-       */ 
-     	public String toString() {
-     	    	String ans = "[";
-		for(int index=0; index<filledElements; index++){
+    /** 
+    @return a string representation of this list,
+    in [a,b,c,] format
+    */ 
+    public String toString() {
+     	String ans = "[";
+		for(int index = 0; index<filledElements; index++){
 			ans += refArray[index] + ",";
 		}
 		
@@ -44,34 +44,36 @@ public class List_inArraySlots{
      	}
 
     
-     /** 
-      Appends @value to the end of this list.
+    /** 
+    Appends @value to the end of this list.
       
-      @return true, in keeping with conventions yet to be discussed
-     */
-      public boolean add( int value) {
-	refArray[filledElements] = value;
-	filledElements ++;
-	return true;
+    @return true, in keeping with conventions yet to be discussed
+    */
+    public boolean add( int value) {
+        // first check if the list is already full
+        if (refArray.length == filledElements)
+            expand(); // if so, expand the array
+    
+        // then add the value 
+        refArray[filledElements] = value;
+        filledElements ++;
+        
+        return true;
       }
 
 
-     /** 
-      Double the capacity of the List_inArraySlots, 
-      preserving existing data
-     */
-      private void expand() {
-         System.out.println( "expand... (for debugging)");
-	      
-         int[] extended = new int[refArray.length * 2];         // instantiate an array with twice the capacity
-	 for(int index=0; index < filledElements;index++){      // copy over each non-null value
-		extended[index] = refArray[index];
-	 }
-	 refArray = extended;					// replace the reference held in refArray to the new array
-		
+    /** 
+    Double the capacity of the List_inArraySlots, 
+    preserving existing data
+    */
+    private void expand() {
+        System.out.println( "expand... (for debugging)");
+    
+        int[] extended = new int[refArray.length * 2];         // instantiate an array with twice the capacity
+        for(int index=0; index < filledElements;index++){      // copy over each non-null value
+            extended[index] = refArray[index];
+        }
+        refArray = extended;                                   // replace the reference held in refArray to the new array
+        
       }
 }
-	
-	
-
-		
