@@ -1,6 +1,6 @@
 /** 
  Test list features.
- */
+ *//
 public class UserOfList {
     public static void main( String[] args ) {
         List_inArraySlots list = new List_inArraySlots();
