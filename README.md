@@ -3,5 +3,20 @@
 
 *Partners: Kyle Sacks and Amy Lei*
 
-Currently the List_inArraySlots class only contains a base array and a length, and only works for ints. Has a constructor and a getLen() function
+
+
+**Fields:**
+- *refArray* which holds an array of integers
+- *length* which holds an integer to describe the length of the array
+
+
+
+**Constructors:**
+- *List_inArraySlots(int len)* which instantiates an array of a given length + 10, and assigns the value to *length* 
+
+
+
+**Methods:** 
+- *getLength()* returns the value stored in the field, *length*
+
 UserOfList only tests instantiation and the length function currently
