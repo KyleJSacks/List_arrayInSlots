@@ -1,11 +1,13 @@
 public class List_inArraySlots{
-	
-	//FIELDS
+	// ===========================================================
+	// FIELDS
 	private int[] refArray;
-	private int filledElements; 
+	private int filledElements;
+
+	private static final int INITIAL_CAPACITY = 10; 
 
 	public List_inArraySlots(){
-		this.refArray = new int[10];
+		this.refArray = new int[INITIAL_CAPACITY];
 		filledElements = 0;
 	}
 
@@ -28,38 +30,42 @@ public class List_inArraySlots{
 	public int size(){
 		return filledElements;
   	}
+
+	public int getValue(int index){
+		return refArray[index];
+	}
 	
-    /** 
-    @return a string representation of this list,
-    in [a,b,c,] format
-    */ 
-    public String toString() {
-     	String ans = "[";
+        /** 
+        @return a string representation of this list,
+        in [a,b,c,] format
+        */ 
+        public String toString() {
+     	    String ans = "[";
 		for(int index = 0; index<filledElements; index++){
 			ans += refArray[index] + ",";
 		}
 		
 		ans += "]";
 		return ans;
-     	}
+     	    }
 
     
-    /** 
-    Appends @value to the end of this list.
+        /** 
+        Appends @value to the end of this list.
       
-    @return true, in keeping with conventions yet to be discussed
-    */
-    public boolean add( int value) {
-        // first check if the list is already full
-        if (refArray.length == filledElements)
-            expand(); // if so, expand the array
+        @return true, in keeping with conventions yet to be discussed
+        */
+        public boolean add( int value) {
+            // first check if the list is already full
+            if (refArray.length == filledElements)
+                expand(); // if so, expand the array
     
-        // then add the value 
-        refArray[filledElements] = value;
-        filledElements ++;
+            // then add the value 
+            refArray[filledElements] = value;
+            filledElements ++;
         
-        return true;
-      }
+            return true;
+       }
 
 
     /** 
@@ -67,8 +73,7 @@ public class List_inArraySlots{
     preserving existing data
     */
     private void expand() {
-        System.out.println( "expand... (for debugging)");
-    
+
         int[] extended = new int[refArray.length * 2];         // instantiate an array with twice the capacity
         for(int index=0; index < filledElements;index++){      // copy over each non-null value
             extended[index] = refArray[index];
