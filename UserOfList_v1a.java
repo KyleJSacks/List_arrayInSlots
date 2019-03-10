@@ -1,12 +1,12 @@
 /**
  Test list features.
  */
-public class UserOfList_v1 {
+public class UserOfList_v1a {
     
-    private static List_inArraySlots_v1 list;
+    private static List_inArraySlots_v1a list;
     
     public static void main( String[] args ) {
-        list = new List_inArraySlots_v1();
+        list = new List_inArraySlots_v1a();
 
          System.out.println( "number of elements: " + list.size() );
          System.out.println( "empty list:" + list);
@@ -96,7 +96,7 @@ public class UserOfList_v1 {
       Test the set() method, reporting and
       changing the value at index @modifyAt.
      */
-     private static void setTest( int modifyAt) {
+     private static void setTest( int modifyAt ) {
         System.out.println(
             "changed element " + modifyAt + " from "
           + list.set( modifyAt, modifyAt + 1000) + " to "

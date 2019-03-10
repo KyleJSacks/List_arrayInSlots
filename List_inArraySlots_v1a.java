@@ -1,4 +1,4 @@
-public class List_inArraySlots_v1{
+public class List_inArraySlots_v1a{
     // ===========================================================
     // FIELDS
     private int[] refArray;
@@ -6,7 +6,7 @@ public class List_inArraySlots_v1{
 
     private static final int INITIAL_CAPACITY = 10;
 
-    public List_inArraySlots_v1(){
+    public List_inArraySlots_v1a(){
         this.refArray = new int[INITIAL_CAPACITY];
         filledElements = 0;
     }
@@ -18,7 +18,7 @@ public class List_inArraySlots_v1{
     To instantiate an array according to an existing array
     precondition: existing array does not have null elements
     */
-    public List_inArraySlots_v1(int[] existingArray){
+    public List_inArraySlots_v1a(int[] existingArray){
         this.refArray = existingArray;
         filledElements = existingArray.length;
     }
@@ -144,15 +144,15 @@ public class List_inArraySlots_v1{
         // keep track of element being moved and element that will be replaced
         int elemReplaced = 0;
         int elemShifting = refArray[index];
-
+        
+        //expand if necessary
+        if (filledElements + 1 > refArray.length) expand();
+              
         // set the new value to given index
         refArray[index] = value;   
 
         // update filledElements 
         filledElements++;
-
-        //expand if necessary
-        if (filledElements >= refArray.length) expand();
 
         // shift the rest of the elements by...
         for ( ++index; index < filledElements; index++){
