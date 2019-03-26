@@ -1,172 +1,98 @@
-public class List_inArraySlots{
-    // ===========================================================
-    // FIELDS
-    private int[] refArray;
-    private int filledElements;
+/**
+  Implement a list of diverse types, including
+  integers, double-precision floating point numbers,
+  and Strings.
+ */
+
+public class List_inElementArray {
+
+
+    private int filledElements; // the number of elements in this list
+
+    /* type identifier for each element
+       That is, typeOfElements[i] == 0 means element i is an integer;
+                                     1 means element i is a double;
+                                     2 means element i is a String.
+        Optional extra education in programming (not comp sci):
+            replace these "magic numbers" with an "enumerated type".
+     */
+    private Element[] list;
 
     private static final int INITIAL_CAPACITY = 10;
 
-    public List_inArraySlots(){
-        this.refArray = new int[INITIAL_CAPACITY];
-        filledElements = 0;
+    /**
+      Construct an empty list with a small initial capacity.
+     */
+    public List_inArraySlots() {
+      list = new Element[INITIAL_CAPACITY];
     }
 
-    // ===========================================================
-    // CONSTRUCTORS
-
-    /*
-    To instantiate an array according to an existing array
-    precondition: existing array does not have null elements
-    */
-    public List_inArraySlots(int[] existingArray){
-        this.refArray = existingArray;
-        filledElements = existingArray.length;
-    }
-
-
-    // ===========================================================
-    // METHODS from v0
-
-    public int size(){
-    return filledElements;
-    }
 
     /**
-    @return a string representation of this list,
-    in [a,b,c,] format
-    */
+      @return the number of elements in this list
+     */
+    public int size() {
+      return filledElements;
+    }
+
+
+     /**
+       @return a string representation of this list,
+       in [a,b,c,] format
+      */
     public String toString() {
-        String ans = "[";
-        for(int index = 0; index<filledElements; index++){
-            ans += refArray[index] + ",";
-        }
-
-        ans += "]";
-        return ans;
+      String stringRep = "[";
+      for (int index = 0; index < filledElements; index++){
+        stringRep += list[index];
+	}
+      stringRep += "]";
+      return stringRep;
     }
 
 
     /**
-    Appends @value to the end of this list.
+      Appends @value to the end of this list.
 
-    @return true, in keeping with conventions yet to be discussed
-    */
-    public boolean add( int value) {
-        // first check if the list is already full
-        if (refArray.length == filledElements)
-            expand(); // if so, expand the array
-
-        // then add the value
-        refArray[filledElements] = value;
-        filledElements ++;
-
-        return true;
-    }
-
-
-    /**
-    Double the capacity of the List_inArraySlots,
-    preserving existing data
-    */
-    private void expand() {
-        
-        int[] extended = new int[refArray.length * 2];         // instantiate an array with twice the capacity
-        for(int index=0; index < filledElements;index++){      // copy over each non-null value
-            extended[index] = refArray[index];
-        }
-        refArray = extended;                                   // replace the reference held in refArray to the new array
-
-      }
-
-    // ===========================================================
-    // METHODS from v1
-
-    /**
-    accessor
-    @return element @index from this list
-    precondition: @index is within the bounds of the array.
-    (Having warned the user about this precondition,
-    you should NOT complicate your code to check
-    whether user violated the condition.)
+      @return true, in keeping with conventions yet to be discussed
      */
-    public int get( int index ) {
-        return refArray[index];
-    }
+     public boolean add( int type   // same meaning as in typeOfElements
+                       , int    intValue
+                       , double doubleValue
+                       , String stringValue
+                       ) {
+           // expand when at max
+           if (filledElements == list.length) expand();
+		   list[filledElements] = new Element(type, intValue, doubleValue, stringValue);
+		   filledElements++;
 
-    /**
-    Store et value at @index to @newValue
-
-    @return old value at @index
-    @precondition: @index is within the bounds of this list.
-    */
-    public int set( int index, int newValue ) {
-        // store old value in local variable to return later
-        int oldValue = refArray[index];
-
-        // assign new value
-        refArray[index] = newValue;
-
-        return oldValue;
-    }
-    
-    
-    /**
-      Remove the element at position @index in this list.
-      Shift any subsequent elements to the left (that is,
-      decrease the index associated with each).
-
-      @return the value that was removed from the list
-     */
-     public int remove( int index) {
-        int removed = refArray[index];
-
-        for( ; index < filledElements; index++){
-            // set the element to the value of the element to the left
-            refArray[index] = refArray[index + 1];
-        }
-        
-        // update number of elements
-        filledElements--;
-        
-        return removed;
+           return true;
      }
 
 
     /**
-    Insert @value at position @index in this list.
+      Double the capacity of the List_inArraySlots,
+      preserving existing data.
+     */
+     private void expand() {
+        System.out.println( "expand... (for debugging)");
+           /* S.O.P. rules for debugging:
+              Working methods should be silent. But during
+              development, the programmer must verify that
+              this method is called when that is appropriate.
+              So test using the println(), then comment it out.
+              */
 
-    Shift the element currently at that position (if any)
-    and any subsequent elements to the right
-    (that is, increase the index associated with each).
-    */
-    public void add( int index, int value) {
+       //System.out.println( "old length:" + typeOfElements.length);
 
-        // keep track of element being moved and element that will be replaced
-        int elemReplaced = 0;
-        int elemShifting = refArray[index];
-        
-        //expand if necessary
-        if (filledElements + 1 > refArray.length) expand();
-              
-        // set the new value to given index
-        refArray[index] = value;   
+          // expand intElements
+        Element[] bigger = new Element[list.length * 2];
+		for(int index=0;index<list.length; index++){
+			bigger[index] = list[index];
+		}
+		list = bigger;
 
-        // update filledElements 
-        filledElements++;
 
-        // shift the rest of the elements by...
-        for ( ++index; index < filledElements; index++){
-            //  keep track of the element that will be replaced
-            elemReplaced = refArray[index];
+       // System.out.println( "new length:" + typeOfElements.length);
 
-            // now replace with the element you were shifting
-            refArray[index] = elemShifting;
-
-            //update the element you are elemShifting
-            elemShifting = elemReplaced;
-        }
-        
-        
-    }
-
+     }
 }

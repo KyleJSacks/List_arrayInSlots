@@ -165,6 +165,10 @@ public class List_inArraySlots_v1{
             //update the element you are elemShifting
             elemShifting = elemReplaced;
         }
+		
+		public void addAsHead(int value){
+			this.add(0, value);
+		}
         
         
     }
